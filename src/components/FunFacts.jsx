@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Gear, Lightbulb } from './Illustrations'
 import { RandomQuote, RandomFact } from './RandomContent'
+import ExpandableDetails from './ExpandableDetails'
+import ToolBelt from './ToolBelt'
 
 const facts = [
   { icon: '🔧', title: 'Soldering Iron', text: 'I can solder tiny SMD components — the smaller the better.' },
@@ -30,7 +32,7 @@ export default function FunFacts() {
         <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">Fun Facts</p>
         <h2 className="text-3xl md:text-4xl font-bold text-text mb-10 tracking-tight">Things you didn't know</h2>
 
-        <div className="grid sm:grid-cols-2 gap-3 mb-8">
+        <div className="grid sm:grid-cols-2 gap-3 mb-10">
           {facts.map((f, i) => (
             <motion.button
               key={f.title}
@@ -39,7 +41,7 @@ export default function FunFacts() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
               onClick={() => setOpen(open === i ? null : i)}
-              className={`text-left p-4 rounded-2xl border transition-all ${
+              className={`text-left p-4 rounded-2xl border transition-all duration-300 ${
                 open === i
                   ? 'bg-accent/5 border-accent/20 shadow-md'
                   : 'bg-[#f0f0f0] border-border/50 hover:shadow-md'
@@ -60,6 +62,18 @@ export default function FunFacts() {
               )}
             </motion.button>
           ))}
+        </div>
+
+        {/* Tool Belt */}
+        <div className="mb-10">
+          <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">My Toolkit</p>
+          <ToolBelt />
+        </div>
+
+        {/* Expandable Hardware Details */}
+        <div className="mb-10">
+          <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">Deep Dives</p>
+          <ExpandableDetails />
         </div>
 
         {/* Random quote and hardware fact */}

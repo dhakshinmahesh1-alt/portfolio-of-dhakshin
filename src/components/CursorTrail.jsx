@@ -1,56 +1,86 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function CursorTrail() {
-  const [particles, setParticles] = useState([])
-  const idRef = useRef(0)
+  const canvasRef = useRef(null)
+  const pointsRef = useRef([])
+  const mouseRef = useRef({ x: 0, y: 0 })
+  const hueRef = useRef(0)
 
   useEffect(() => {
-    let lastTime = 0
-    const handleMove = (e) => {
-      const now = Date.now()
-      if (now - lastTime < 80) return
-      lastTime = now
+    const canvas = canvasRef.current
+    const ctx = canvas.getContext('2d')
+    let animFrame
 
-      const id = idRef.current++
-      setParticles(prev => [...prev.slice(-12), {
-        id,
+    const resize = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+    resize()
+    window.addEventListener('resize', resize)
+
+    const handleMove = (e) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY }
+      pointsRef.current.push({
         x: e.clientX,
         y: e.clientY,
-      }])
-
-      setTimeout(() => {
-        setParticles(prev => prev.filter(p => p.id !== id))
-      }, 800)
+        age: 0,
+        hue: hueRef.current,
+      })
+      hueRef.current = (hueRef.current + 2) % 360
+      if (pointsRef.current.length > 50) pointsRef.current.shift()
     }
 
     window.addEventListener('mousemove', handleMove)
-    return () => window.removeEventListener('mousemove', handleMove)
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      const pts = pointsRef.current
+      for (let i = pts.length - 1; i >= 0; i--) {
+        pts[i].age++
+        if (pts[i].age > 20) {
+          pts.splice(i, 1)
+        }
+      }
+
+      if (pts.length < 2) {
+        animFrame = requestAnimationFrame(draw)
+        return
+      }
+
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+
+      for (let i = 1; i < pts.length; i++) {
+        const p0 = pts[i - 1]
+        const p1 = pts[i]
+        const life = 1 - p1.age / 20
+        const width = life * 4
+
+        ctx.beginPath()
+        ctx.moveTo(p0.x, p0.y)
+        ctx.lineTo(p1.x, p1.y)
+        ctx.strokeStyle = `hsla(${p1.hue}, 80%, 60%, ${life * 0.7})`
+        ctx.lineWidth = width
+        ctx.stroke()
+      }
+
+      animFrame = requestAnimationFrame(draw)
+    }
+
+    draw()
+
+    return () => {
+      window.removeEventListener('resize', resize)
+      window.removeEventListener('mousemove', handleMove)
+      cancelAnimationFrame(animFrame)
+    }
   }, [])
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[9999]">
-      {particles.map((p, i) => (
-        <svg
-          key={p.id}
-          className="absolute transition-all duration-700 ease-out"
-          style={{
-            left: p.x - 8,
-            top: p.y - 8,
-            opacity: 0.3 - i * 0.02,
-            transform: `rotate(${i * 30}deg) scale(${0.6 + i * 0.03})`,
-          }}
-          width="16"
-          height="16"
-          viewBox="0 0 100 100"
-        >
-          <path
-            d="M10 50L90 15L55 85L45 55L10 50Z"
-            fill="none"
-            stroke="#94a3b8"
-            strokeWidth="4"
-          />
-        </svg>
-      ))}
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-[9999]"
+    />
   )
 }

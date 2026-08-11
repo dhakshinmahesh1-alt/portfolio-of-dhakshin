@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
 import { MemoryGame, ReactionGame } from './MiniGames'
+import RCCarGame from './RCCarGame'
 import { Gear, PaperPlane, Lightbulb } from './Illustrations'
 
 export default function Play() {
   return (
-    <section className="py-32 px-6 bg-[#f0f0f0] relative overflow-hidden">
+    <section id="play" className="py-32 px-6 bg-[#f0f0f0] relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.12 }} viewport={{ once: true }} className="absolute top-10 left-[5%] rotate-15">
           <PaperPlane size={60} />
@@ -17,13 +18,19 @@ export default function Play() {
         </motion.div>
       </div>
 
-      <div className="max-w-3xl mx-auto relative z-10">
+      <div className="max-w-4xl mx-auto relative z-10">
         <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">Play</p>
         <h2 className="text-3xl md:text-4xl font-bold text-text mb-4 tracking-tight">Take a break</h2>
         <p className="text-text-secondary text-sm mb-12 max-w-md">
-          A couple of quick games to test your reflexes and memory. You deserve a break.
+          Quick games to test your reflexes, memory, and driving skills.
         </p>
 
+        {/* RC Car Game — full width */}
+        <div className="mb-6">
+          <RCCarGame />
+        </div>
+
+        {/* Smaller games */}
         <div className="grid md:grid-cols-2 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}

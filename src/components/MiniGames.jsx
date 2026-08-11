@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 
-const ICONS = ['🔧', '⚙️', '💡', '🔌', '🔋', '🧲', '🪛', '📎', '✂️', '🔨']
+const TOOL_ICONS = ['🔧', '⚙️', '💡', '🔌', '🔋', '🧲', '🪛', '📎', '✂️', '🔨', '🪤', '🧰']
 
 function generateBoard(size) {
-  const pairs = ICONS.slice(0, size)
+  const pairs = TOOL_ICONS.slice(0, size)
   const cards = [...pairs, ...pairs]
     .sort(() => Math.random() - 0.5)
     .map((icon, i) => ({ id: i, icon, flipped: false, matched: false }))
@@ -16,13 +16,14 @@ export function MemoryGame() {
   const [flipped, setFlipped] = useState([])
   const [moves, setMoves] = useState(0)
   const [won, setWon] = useState(false)
+  const [disabled, setDisabled] = useState(false)
 
   const handleFlip = useCallback((id) => {
-    if (flipped.length === 2) return
+    if (disabled) return
+    if (flipped.length >= 2) return
     if (cards[id].flipped || cards[id].matched) return
 
-    const newCards = [...cards]
-    newCards[id] = { ...newCards[id], flipped: true }
+    const newCards = cards.map((c, i) => i === id ? { ...c, flipped: true } : c)
     setCards(newCards)
 
     const newFlipped = [...flipped, id]
@@ -31,58 +32,63 @@ export function MemoryGame() {
     if (newFlipped.length === 2) {
       setMoves(m => m + 1)
       const [a, b] = newFlipped
+      setDisabled(true)
+
       if (newCards[a].icon === newCards[b].icon) {
         setTimeout(() => {
           setCards(prev => prev.map(c =>
             c.icon === newCards[a].icon ? { ...c, matched: true } : c
           ))
           setFlipped([])
-          if (newCards.filter(c => !c.matched && c.id !== a && c.id !== b).length <= 0) {
-            setWon(true)
-          }
-        }, 400)
+          setDisabled(false)
+          const remaining = newCards.filter(c => !c.matched && c.id !== a && c.id !== b)
+          if (remaining.length === 0) setWon(true)
+        }, 500)
       } else {
         setTimeout(() => {
-          setCards(prev => prev.map(c =>
-            c.id === a || c.id === b ? { ...c, flipped: false } : c
+          setCards(prev => prev.map((c, i) =>
+            i === a || i === b ? { ...c, flipped: false } : c
           ))
           setFlipped([])
-        }, 800)
+          setDisabled(false)
+        }, 900)
       }
     }
-  }, [cards, flipped])
+  }, [cards, flipped, disabled])
 
   const reset = () => {
     setCards(generateBoard(6))
     setFlipped([])
     setMoves(0)
     setWon(false)
+    setDisabled(false)
   }
 
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <p className="text-xs text-muted">Moves: {moves}</p>
-        {won && <p className="text-xs text-accent font-semibold">You won in {moves} moves!</p>}
-        <button onClick={reset} className="text-xs text-muted hover:text-text transition-colors underline">
-          Reset
-        </button>
+        <p className="text-xs text-muted font-mono">Moves: {moves}</p>
+        {won && <p className="text-xs text-green-600 font-bold">Done in {moves}!</p>}
+        <button onClick={reset} className="text-xs text-muted hover:text-text transition-colors underline">Reset</button>
       </div>
       <div className="grid grid-cols-4 gap-2">
         {cards.map((card) => (
           <motion.button
             key={card.id}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.92 }}
             onClick={() => handleFlip(card.id)}
-            className={`aspect-square rounded-xl text-xl flex items-center justify-center transition-all duration-300 border
+            disabled={card.matched || disabled}
+            className={`aspect-square rounded-xl text-xl flex items-center justify-center transition-all duration-300 border select-none
               ${card.matched
-                ? 'bg-accent/10 border-accent/30'
+                ? 'bg-green-50 border-green-200 scale-95'
                 : card.flipped
-                  ? 'bg-white border-border shadow-sm'
-                  : 'bg-surface-2 border-border/50 hover:border-border cursor-pointer'
+                  ? 'bg-white border-border shadow-sm rotate-0'
+                  : 'bg-surface-2 border-border/50 hover:border-border hover:bg-white cursor-pointer active:scale-95'
               }`}
           >
-            {card.flipped || card.matched ? card.icon : '?'}
+            <span className={`transition-transform duration-300 ${(card.flipped || card.matched) ? 'rotate-0 scale-100' : ''}`}>
+              {card.flipped || card.matched ? card.icon : '❓'}
+            </span>
           </motion.button>
         ))}
       </div>
@@ -91,7 +97,7 @@ export function MemoryGame() {
 }
 
 export function ReactionGame() {
-  const [state, setState] = useState('idle') // idle, waiting, go, result
+  const [state, setState] = useState('idle')
   const [startTime, setStartTime] = useState(0)
   const [reactionTime, setReactionTime] = useState(null)
   const [bestTime, setBestTime] = useState(null)
@@ -107,6 +113,10 @@ export function ReactionGame() {
   }
 
   const click = () => {
+    if (state === 'idle' || state === 'result') {
+      start()
+      return
+    }
     if (state === 'waiting') {
       setState('idle')
       setReactionTime(null)
@@ -123,28 +133,28 @@ export function ReactionGame() {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <p className="text-xs text-muted">
-          {bestTime !== null ? `Best: ${bestTime}ms` : 'Click to start'}
+        <p className="text-xs text-muted font-mono">
+          {bestTime !== null ? `Best: ${bestTime}ms` : 'Test your reflexes'}
         </p>
         {reactionTime !== null && state === 'result' && (
-          <p className="text-xs text-accent font-semibold">{reactionTime}ms</p>
+          <p className="text-xs text-accent font-bold">{reactionTime}ms</p>
         )}
       </div>
       <motion.button
         whileTap={{ scale: 0.97 }}
-        onClick={state === 'idle' || state === 'result' ? start : click}
-        className={`w-full h-32 rounded-2xl flex items-center justify-center text-sm font-medium transition-all duration-300 border
+        onClick={click}
+        className={`w-full h-32 rounded-2xl flex items-center justify-center text-sm font-semibold transition-all duration-200 border select-none
           ${state === 'idle' || state === 'result'
             ? 'bg-surface-2 border-border/50 text-muted hover:border-border cursor-pointer'
             : state === 'waiting'
-              ? 'bg-amber-50 border-amber-200 text-amber-700'
-              : 'bg-green-50 border-green-200 text-green-700'
+              ? 'bg-amber-50 border-amber-300 text-amber-700 cursor-pointer'
+              : 'bg-green-50 border-green-300 text-green-700 cursor-pointer scale-[1.02]'
           }`}
       >
-        {state === 'idle' && 'Click to Start'}
-        {state === 'waiting' && 'Wait for green...'}
-        {state === 'go' && 'CLICK NOW!'}
-        {state === 'result' && `Click to Try Again`}
+        {state === 'idle' && '🟢 Click to Start'}
+        {state === 'waiting' && '⏳ Wait for green...'}
+        {state === 'go' && '🟩 CLICK NOW!'}
+        {state === 'result' && '🔄 Try Again'}
       </motion.button>
     </div>
   )
