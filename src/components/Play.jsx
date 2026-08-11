@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { MemoryGame, ReactionGame } from './MiniGames'
+import { MemoryGame, ReactionGame, SnakeGame, BreakoutGame, TicTacToe } from './MiniGames'
 import RCCarGame from './RCCarGame'
 import { Gear, PaperPlane, Lightbulb } from './Illustrations'
 
@@ -20,9 +20,9 @@ export default function Play() {
 
       <div className="max-w-4xl mx-auto relative z-10">
         <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">Play</p>
-        <h2 className="text-3xl md:text-4xl font-bold text-text mb-4 tracking-tight">Take a break</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-text mb-4 tracking-tight">Mini Games Arcade</h2>
         <p className="text-text-secondary text-sm mb-12 max-w-md">
-          Quick games to test your reflexes, memory, and driving skills.
+          Take a break and play some quick games — test your reflexes, memory, and skills.
         </p>
 
         {/* RC Car Game — full width */}
@@ -30,7 +30,35 @@ export default function Play() {
           <RCCarGame />
         </div>
 
-        {/* Smaller games */}
+        {/* Snake Game — full width */}
+        <div className="mb-6">
+          <div className="bg-white border border-border rounded-2xl p-5 hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-lg">🐍</span>
+              <h3 className="text-sm font-semibold text-text">Snake</h3>
+            </div>
+            <p className="text-xs text-text-secondary mb-3">
+              Classic snake — eat food, grow longer, don't hit walls or yourself!
+            </p>
+            <SnakeGame />
+          </div>
+        </div>
+
+        {/* Breakout Game — full width */}
+        <div className="mb-6">
+          <div className="bg-white border border-border rounded-2xl p-5 hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-lg">🧱</span>
+              <h3 className="text-sm font-semibold text-text">Breakout</h3>
+            </div>
+            <p className="text-xs text-text-secondary mb-3">
+              Break all the bricks with the ball — move the paddle with your mouse.
+            </p>
+            <BreakoutGame />
+          </div>
+        </div>
+
+        {/* Smaller games grid */}
         <div className="grid md:grid-cols-2 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -64,6 +92,23 @@ export default function Play() {
               How fast are your reflexes? Click as soon as you see green.
             </p>
             <ReactionGame />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-white border border-border rounded-2xl p-6 hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-lg">❌</span>
+              <h3 className="text-sm font-semibold text-text">Tic Tac Toe</h3>
+            </div>
+            <p className="text-xs text-text-secondary mb-4">
+              Classic noughts and crosses — play against a friend!
+            </p>
+            <TicTacToe />
           </motion.div>
         </div>
       </div>
