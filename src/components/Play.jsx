@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { MemoryGame, ReactionGame, SnakeGame, BreakoutGame, TicTacToe } from './MiniGames'
+import { MemoryGame, ReactionGame, SnakeGame, BreakoutGame, TicTacToe, WhackAMole, SimonSays, FlappyBird, NumberGuess } from './MiniGames'
 import RCCarGame from './RCCarGame'
 import { Gear, PaperPlane, Lightbulb } from './Illustrations'
 
@@ -58,8 +58,22 @@ export default function Play() {
           </div>
         </div>
 
+        {/* Flappy Bird — full width */}
+        <div className="mb-6">
+          <div className="bg-white border border-border rounded-2xl p-5 hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-lg">🐦</span>
+              <h3 className="text-sm font-semibold text-text">Flappy Bird</h3>
+            </div>
+            <p className="text-xs text-text-secondary mb-3">
+              Tap or press Space to fly through the pipes!
+            </p>
+            <FlappyBird />
+          </div>
+        </div>
+
         {/* Smaller games grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -109,6 +123,57 @@ export default function Play() {
               Classic noughts and crosses — play against a friend!
             </p>
             <TicTacToe />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="bg-white border border-border rounded-2xl p-6 hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-lg">🎯</span>
+              <h3 className="text-sm font-semibold text-text">Whack-a-Mole</h3>
+            </div>
+            <p className="text-xs text-text-secondary mb-4">
+              Hit the moles before they disappear! 30 seconds to score.
+            </p>
+            <WhackAMole />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="bg-white border border-border rounded-2xl p-6 hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-lg">🧠</span>
+              <h3 className="text-sm font-semibold text-text">Simon Says</h3>
+            </div>
+            <p className="text-xs text-text-secondary mb-4">
+              Watch the pattern and repeat it. How far can you go?
+            </p>
+            <SimonSays />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="bg-white border border-border rounded-2xl p-6 hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-lg">🔢</span>
+              <h3 className="text-sm font-semibold text-text">Number Guess</h3>
+            </div>
+            <p className="text-xs text-text-secondary mb-4">
+              Guess the number between 1-100. Higher or lower hints!
+            </p>
+            <NumberGuess />
           </motion.div>
         </div>
       </div>

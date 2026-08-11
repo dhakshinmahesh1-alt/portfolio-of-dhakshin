@@ -537,3 +537,440 @@ export function TicTacToe() {
     </div>
   )
 }
+
+export function WhackAMole() {
+  const [moles, setMoles] = useState(Array(9).fill(false))
+  const [score, setScore] = useState(0)
+  const [timeLeft, setTimeLeft] = useState(30)
+  const [playing, setPlaying] = useState(false)
+  const intervalRef = useRef(null)
+  const moleIntervalRef = useRef(null)
+
+  const randomMole = () => Math.floor(Math.random() * 9)
+
+  const startGame = () => {
+    setMoles(Array(9).fill(false))
+    setScore(0)
+    setTimeLeft(30)
+    setPlaying(true)
+
+    intervalRef.current = setInterval(() => {
+      setTimeLeft(t => {
+        if (t <= 1) {
+          setPlaying(false)
+          clearInterval(intervalRef.current)
+          clearInterval(moleIntervalRef.current)
+          return 0
+        }
+        return t - 1
+      })
+    }, 1000)
+
+    moleIntervalRef.current = setInterval(() => {
+      if (!playing) return
+      setMoles(prev => {
+        const next = prev.map(() => false)
+        next[randomMole()] = true
+        return next
+      })
+    }, 800)
+  }
+
+  const whack = (i) => {
+    if (!playing || !moles[i]) return
+    setMoles(prev => {
+      const next = [...prev]
+      next[i] = false
+      return next
+    })
+    setScore(s => s + 1)
+  }
+
+  useEffect(() => {
+    return () => {
+      clearInterval(intervalRef.current)
+      clearInterval(moleIntervalRef.current)
+    }
+  }, [])
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-xs text-muted font-mono">Score: {score}</p>
+        <p className={`text-xs font-mono ${timeLeft <= 5 && timeLeft > 0 ? 'text-red-500' : 'text-muted'}`}>
+          Time: {timeLeft}s
+        </p>
+      </div>
+      <div className="grid grid-cols-3 gap-2 max-w-[200px] mx-auto">
+        {moles.map((mole, i) => (
+          <motion.button
+            key={i}
+            whileTap={{ scale: 0.85 }}
+            onClick={() => whack(i)}
+            disabled={!playing}
+            className={`aspect-square rounded-xl text-2xl flex items-center justify-center transition-all border select-none
+              ${mole
+                ? 'bg-amber-50 border-amber-300 shadow-lg shadow-amber-200/50 animate-bounce'
+                : playing
+                  ? 'bg-surface-2 border-border/50 cursor-pointer'
+                  : 'bg-surface-2 border-border/50 opacity-50'}`}
+          >
+            {mole ? '🛠️' : '🕳️'}
+          </motion.button>
+        ))}
+      </div>
+      {!playing && timeLeft === 0 && (
+        <p className="text-center text-xs text-green-600 font-bold mt-2">Final Score: {score}</p>
+      )}
+      {!playing && (
+        <button
+          onClick={startGame}
+          className="w-full mt-3 px-4 py-2 rounded-lg bg-text text-white text-xs font-bold hover:bg-text/80 transition-colors"
+        >
+          {timeLeft === 0 ? '🔄 Play Again' : '🎯 Start Whack-a-Mole'}
+        </button>
+      )}
+      <div className="flex items-center gap-3 mt-2 text-[10px] text-muted">
+        <span>🛠️ Click the moles</span>
+        <span>⏱️ 30 seconds</span>
+      </div>
+    </div>
+  )
+}
+
+export function SimonSays() {
+  const [sequence, setSequence] = useState([])
+  const [userSequence, setUserSequence] = useState([])
+  const [playing, setPlaying] = useState(false)
+  const [showing, setShowing] = useState(false)
+  const [score, setScore] = useState(0)
+  const [gameOver, setGameOver] = useState(false)
+  const colors = ['🔴', '🔵', '🟢', '🟡']
+  const colorClasses = [
+    'bg-red-500 border-red-400',
+    'bg-blue-500 border-blue-400',
+    'bg-green-500 border-green-400',
+    'bg-yellow-500 border-yellow-400'
+  ]
+
+  const addToSequence = () => {
+    const next = Math.floor(Math.random() * 4)
+    setSequence(prev => [...prev, next])
+  }
+
+  const startGame = () => {
+    setSequence([])
+    setUserSequence([])
+    setScore(0)
+    setGameOver(false)
+    setPlaying(true)
+    addToSequence()
+    playSequence()
+  }
+
+  const playSequence = async () => {
+    setShowing(true)
+    for (let i = 0; i < sequence.length; i++) {
+      await new Promise(r => setTimeout(r, 500))
+      // Visual flash handled by showing state
+      await new Promise(r => setTimeout(r, 300))
+    }
+    setShowing(false)
+    setUserSequence([])
+  }
+
+  const handleColor = (colorIndex) => {
+    if (!playing || showing || gameOver) return
+    const newUserSeq = [...userSequence, colorIndex]
+    setUserSequence(newUserSeq)
+
+    if (newUserSeq[newUserSeq.length - 1] !== sequence[newUserSeq.length - 1]) {
+      setGameOver(true)
+      setPlaying(false)
+      return
+    }
+
+    if (newUserSeq.length === sequence.length) {
+      setScore(s => s + 1)
+      setTimeout(() => {
+        addToSequence()
+        playSequence()
+      }, 1000)
+    }
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-xs text-muted font-mono">Level: {score + 1}</p>
+        <p className="text-xs text-muted font-mono">Best: {score}</p>
+      </div>
+      <div className="grid grid-cols-2 gap-3 max-w-[200px] mx-auto mb-4">
+        {colors.map((color, i) => (
+          <motion.button
+            key={i}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleColor(i)}
+            disabled={!playing || showing || gameOver}
+            className={`aspect-square rounded-xl text-2xl flex items-center justify-center transition-all border-4 select-none
+              ${showing && sequence[userSequence.length] === i
+                ? 'scale-105 shadow-xl shadow-white/50'
+                : ''} ${colorClasses[i]}`}
+          >
+            {color}
+          </motion.button>
+        ))}
+      </div>
+      {showing && (
+        <p className="text-center text-xs text-muted mb-2">Watch the pattern...</p>
+      )}
+      {!playing && !gameOver && (
+        <button
+          onClick={startGame}
+          className="w-full px-4 py-2 rounded-lg bg-text text-white text-xs font-bold hover:bg-text/80 transition-colors"
+        >
+          🧠 Start Simon Says
+        </button>
+      )}
+      {gameOver && (
+        <button
+          onClick={startGame}
+          className="w-full px-4 py-2 rounded-lg bg-red-500 text-white text-xs font-bold hover:bg-red-600 transition-colors"
+        >
+          🔄 Try Again (Level {score + 1})
+        </button>
+      )}
+      <div className="flex items-center gap-3 mt-2 text-[10px] text-muted">
+        <span>👀 Watch pattern</span>
+        <span>🔁 Repeat it</span>
+      </div>
+    </div>
+  )
+}
+
+export function FlappyBird() {
+  const [birdY, setBirdY] = useState(50)
+  const [velocity, setVelocity] = useState(0)
+  const [pipes, setPipes] = useState([{ x: 100, gapY: 30 }])
+  const [score, setScore] = useState(0)
+  const [gameOver, setGameOver] = useState(false)
+  const [started, setStarted] = useState(false)
+  const birdRef = useRef(birdY)
+  const pipesRef = useRef(pipes)
+
+  birdRef.current = birdY
+  pipesRef.current = pipes
+
+  const jump = () => {
+    if (!started || gameOver) return
+    setVelocity(-4)
+  }
+
+  useEffect(() => {
+    if (!started || gameOver) return
+    const interval = setInterval(() => {
+      // Bird physics
+      setVelocity(v => v + 0.3)
+      setBirdY(y => {
+        const newY = Math.max(0, Math.min(100, y + velocity))
+        if (newY === 0 || newY === 100) setGameOver(true)
+        return newY
+      })
+
+      // Move pipes
+      setPipes(prev => {
+        const next = prev.map(p => ({ ...p, x: p.x - 1.5 }))
+        // Add new pipe
+        if (next[next.length - 1].x < 60) {
+          next.push({ x: 100, gapY: 15 + Math.random() * 50 })
+        }
+        // Remove off-screen pipes
+        return next.filter(p => p.x > -10)
+      })
+
+      // Score
+      setPipes(prev => {
+        if (prev[0] && prev[0].x < 5 && prev[0].x > 3.5) {
+          setScore(s => s + 1)
+        }
+        return prev
+      })
+
+      // Collision
+      const birdX = 10
+      const birdSize = 4
+      setPipes(prev => {
+        for (const pipe of prev) {
+          if (birdX + birdSize > pipe.x && birdX - birdSize < pipe.x + 8) {
+            if (birdY - birdSize < pipe.gapY || birdY + birdSize > pipe.gapY + 25) {
+              setGameOver(true)
+              break
+            }
+          }
+        }
+        return prev
+      })
+    }, 1000 / 60)
+    return () => clearInterval(interval)
+  }, [started, gameOver, velocity])
+
+  const handleKey = (e) => {
+    if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w') {
+      e.preventDefault()
+      if (!started) {
+        setStarted(true)
+      } else if (gameOver) {
+        setBirdY(50)
+        setVelocity(0)
+        setPipes([{ x: 100, gapY: 30 }])
+        setScore(0)
+        setGameOver(false)
+      } else {
+        jump()
+      }
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [])
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-xs text-muted font-mono">Score: {score}</p>
+      </div>
+      <div
+        className="relative bg-sky-100 rounded-xl overflow-hidden border border-border/30"
+        style={{ width: '100%', aspectRatio: '10/7' }}
+        tabIndex={0}
+        onClick={jump}
+      >
+        {/* Pipes */}
+        {pipes.map((pipe, i) => (
+          <div key={i} className="absolute bg-green-600" style={{
+            left: `${pipe.x}%`,
+            top: 0,
+            width: '8%',
+            height: `${pipe.gapY}%`,
+            border: '1px solid #15803d',
+          }} />
+        ))}
+        {pipes.map((pipe, i) => (
+          <div key={i} className="absolute bg-green-600" style={{
+            left: `${pipe.x}%`,
+            top: `${pipe.gapY + 25}%`,
+            width: '8%',
+            height: `${100 - pipe.gapY - 25}%`,
+            border: '1px solid #15803d',
+          }} />
+        ))}
+
+        {/* Bird */}
+        <div
+          className="absolute text-lg"
+          style={{
+            left: '10%',
+            top: `${birdY}%`,
+            transform: 'translateY(-50%)',
+            transition: 'top 0.01s linear',
+          }}
+        >
+          🐦
+        </div>
+
+        {/* Overlays */}
+        {!started && (
+          <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center gap-2 z-10">
+            <p className="text-white font-bold text-sm">🐦 Flappy Bird</p>
+            <button onClick={() => setStarted(true)} className="px-6 py-2 rounded-full bg-white text-black text-xs font-bold hover:bg-white/90">Click/Space to Start</button>
+          </div>
+        )}
+        {gameOver && (
+          <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center gap-2 z-10">
+            <p className="text-red-400 font-bold text-sm">Game Over! Score: {score}</p>
+            <button onClick={() => { setBirdY(50); setVelocity(0); setPipes([{ x: 100, gapY: 30 }]); setScore(0); setGameOver(false) }} className="px-6 py-2 rounded-full bg-white text-black text-xs font-bold hover:bg-white/90">🔄 Play Again</button>
+          </div>
+        )}
+      </div>
+      <div className="flex items-center gap-3 mt-2 text-[10px] text-muted">
+        <span>🖱️ Click or Space</span>
+        <span>🐦 Fly through pipes</span>
+      </div>
+    </div>
+  )
+}
+
+export function NumberGuess() {
+  const [target, setTarget] = useState(() => Math.floor(Math.random() * 100) + 1)
+  const [guess, setGuess] = useState('')
+  const [history, setHistory] = useState([])
+  const [won, setWon] = useState(false)
+
+  const submit = () => {
+    if (!guess || won) return
+    const g = parseInt(guess)
+    if (g < 1 || g > 100) return
+    setHistory(prev => [...prev, g])
+    if (g === target) {
+      setWon(true)
+    }
+    setGuess('')
+  }
+
+  const reset = () => {
+    setTarget(Math.floor(Math.random() * 100) + 1)
+    setGuess('')
+    setHistory([])
+    setWon(false)
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-xs text-muted font-mono">Attempts: {history.length}</p>
+        {won && <p className="text-xs text-green-600 font-bold">You got it! 🎉</p>}
+      </div>
+      <div className="flex gap-2 mb-4">
+        <input
+          type="number"
+          min="1"
+          max="100"
+          value={guess}
+          onChange={(e) => setGuess(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && submit()}
+          disabled={won}
+          className="flex-1 px-4 py-2 rounded-lg bg-white border border-border text-text placeholder-muted text-sm focus:outline-none focus:ring-2 focus:ring-text/5"
+          placeholder="1-100"
+        />
+        <button onClick={submit} disabled={won || !guess} className="px-4 py-2 rounded-lg bg-text text-white text-sm font-medium hover:bg-text/80 disabled:opacity-50">Guess</button>
+      </div>
+      <div className="flex flex-wrap gap-1.5 max-h-20 overflow-y-auto">
+        {history.map((h, i) => (
+          <motion.span
+            key={i}
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1 }}
+            className={`px-2 py-1 rounded-full text-xs font-mono border ${
+              h === target ? 'bg-green-100 border-green-300 text-green-700' :
+              h < target ? 'bg-blue-100 border-blue-300 text-blue-700' :
+              'bg-amber-100 border-amber-300 text-amber-700'
+            }`}
+          >
+            {h} {h < target ? '⬆️' : h > target ? '⬇️' : '✓'}
+          </motion.span>
+        ))}
+      </div>
+      {won && (
+        <button onClick={reset} className="w-full mt-3 px-4 py-2 rounded-lg bg-text text-white text-xs font-bold hover:bg-text/80 transition-colors">
+          🔄 Play Again
+        </button>
+      )}
+      <div className="flex items-center gap-3 mt-2 text-[10px] text-muted">
+        <span>🔢 Guess 1-100</span>
+        <span>⬆️ Higher / ⬇️ Lower</span>
+      </div>
+    </div>
+  )
+}
