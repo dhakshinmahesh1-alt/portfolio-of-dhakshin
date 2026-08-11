@@ -9,7 +9,6 @@ const projects = [
     description: 'An AI assistant app built with API keys — my first project.',
     tags: ['AI', 'API', 'Web'],
     live: 'https://bess-h1.vercel.app',
-    day: '01',
     color: '#ef4444',
     spin: 3,
   },
@@ -18,7 +17,6 @@ const projects = [
     description: 'A more advanced AI app with better features and cleaner design.',
     tags: ['AI', 'API', 'Web'],
     live: 'https://lux-ai.vercel.app',
-    day: '02',
     color: '#a855f7',
     spin: -2,
   },
@@ -27,7 +25,6 @@ const projects = [
     description: 'An AI focused on gaming — built for gamers, by a gamer.',
     tags: ['AI', 'Gaming', 'API'],
     live: 'https://vaano-v1.vercel.app',
-    day: '03',
     color: '#22d3ee',
     spin: 4,
   },
@@ -36,7 +33,6 @@ const projects = [
     description: 'An editor app I built for creative work.',
     tags: ['Editor', 'Web', 'Creative'],
     live: 'https://vaano-v1.vercel.app',
-    day: '04',
     color: '#22c55e',
     spin: -3,
   },
@@ -45,7 +41,6 @@ const projects = [
     description: 'A workspace tool — another project I built.',
     tags: ['Productivity', 'Web'],
     live: 'https://everything-workspace.vercel.app',
-    day: '05',
     color: '#f59e0b',
     spin: 2,
   },
@@ -54,7 +49,6 @@ const projects = [
     description: "The site you're looking at right now.",
     tags: ['React', 'Vite', 'Tailwind'],
     github: 'https://github.com/dhakshinmahesh1-alt/portfolio-of-dhakshin',
-    day: '06',
     color: '#ec4899',
     spin: -4,
   },
@@ -139,7 +133,6 @@ export default function Projects() {
                       backgroundSize: '20px 20px'
                     }} />
                     <p className="text-white/70 text-[10px] font-semibold uppercase tracking-widest relative z-10">Project</p>
-                    <p className="text-white text-4xl font-black leading-none mt-1 relative z-10">{p.day}</p>
                   </div>
 
                   {/* Content body */}
