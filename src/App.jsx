@@ -3,9 +3,6 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
-import Experiments from './components/Experiments'
-import Gallery from './components/Gallery'
-import Stats from './components/Stats'
 import Learning from './components/Learning'
 import Journey from './components/Journey'
 import Play from './components/Play'
@@ -40,9 +37,6 @@ export default function App() {
       <About />
       <Skills />
       <Projects />
-      <Experiments />
-      <Gallery />
-      <Stats />
       <Learning />
       <Journey />
       <Play />
