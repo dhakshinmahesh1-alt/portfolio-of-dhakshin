@@ -41,17 +41,6 @@ const skillCategories = [
     ],
   },
   {
-    title: 'AI & APIs',
-    icon: '🤖',
-    color: '#22c55e',
-    items: [
-      { name: 'Claude API', level: 70 },
-      { name: 'OpenAI API', level: 65 },
-      { name: 'REST APIs', level: 60 },
-      { name: 'Prompt Engineering', level: 85 },
-    ],
-  },
-  {
     title: 'Tools',
     icon: '🛠️',
     color: '#f59e0b',
