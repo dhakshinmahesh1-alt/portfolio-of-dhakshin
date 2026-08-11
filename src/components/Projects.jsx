@@ -35,7 +35,7 @@ const projects = [
   },
   {
     title: 'This Portfolio',
-    description: 'The site you\'re looking at right now. Built with React, Vite, and Tailwind.',
+    description: "The site you're looking at right now.",
     tags: ['React', 'Vite', 'Tailwind'],
     github: 'https://github.com/dhakshinmahesh1-alt/portfolio-of-dhakshin',
   },
@@ -43,51 +43,52 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-6">
+    <section id="projects" className="py-32 px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.6 }}
-        className="max-w-5xl mx-auto"
+        className="max-w-3xl mx-auto"
       >
-        <p className="text-accent font-mono text-sm mb-3 tracking-wider uppercase">Projects</p>
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
+        <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">Projects</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-text mb-12 tracking-tight">
           Things I've built
         </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="space-y-4">
           {projects.map((p, i) => (
             <motion.div
               key={p.title}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="group bg-surface border border-border rounded-xl p-5 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5 flex flex-col"
+              className="group bg-white border border-border rounded-2xl p-6 hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center gap-4"
             >
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-accent transition-colors">
-                {p.title}
-              </h3>
-              <p className="text-sm text-muted leading-relaxed mb-4 flex-1">
-                {p.description}
-              </p>
-
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {p.tags.map((t) => (
-                  <span key={t} className="text-[11px] px-2 py-1 rounded-md bg-accent/10 text-accent/80">
-                    {t}
-                  </span>
-                ))}
+              <div className="flex-1">
+                <h3 className="text-base font-semibold text-text group-hover:text-accent transition-colors">
+                  {p.title}
+                </h3>
+                <p className="text-sm text-text-secondary mt-1">
+                  {p.description}
+                </p>
+                <div className="flex flex-wrap gap-1.5 mt-3">
+                  {p.tags.map((t) => (
+                    <span key={t} className="text-[11px] px-2 py-0.5 rounded-full bg-surface-2 text-muted border border-border/50">
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex items-center gap-3 pt-3 border-t border-border/50">
+              <div className="flex items-center gap-3 shrink-0">
                 {p.github && (
                   <a
                     href={p.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-muted hover:text-white transition-colors"
+                    className="flex items-center gap-1.5 text-xs text-muted hover:text-text transition-colors"
                   >
                     <GitHubIcon /> Code
                   </a>
@@ -97,7 +98,7 @@ export default function Projects() {
                     href={p.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-muted hover:text-white transition-colors"
+                    className="flex items-center gap-1.5 text-xs text-muted hover:text-text transition-colors"
                   >
                     <ExternalLink size={14} /> Live
                   </a>

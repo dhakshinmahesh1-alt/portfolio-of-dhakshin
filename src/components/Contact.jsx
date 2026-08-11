@@ -18,74 +18,74 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 px-6 bg-surface-2/50">
+    <section id="contact" className="py-32 px-6 bg-surface-2">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.6 }}
-        className="max-w-4xl mx-auto"
+        className="max-w-3xl mx-auto"
       >
-        <p className="text-accent font-mono text-sm mb-3 tracking-wider uppercase">Contact</p>
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
+        <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">Contact</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-text mb-10 tracking-tight">
           Get in touch
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-6">
-            <p className="text-muted leading-relaxed">
+            <p className="text-text-secondary leading-relaxed">
               Have a project idea, want to collaborate, or just want to say hi?
-              Drop me a message and I'll get back to you.
+              Drop me a message.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm">
-                <Mail size={16} className="text-accent" />
-                <span className="text-muted">dhakshinmahesh1@gmail.com</span>
+                <Mail size={16} className="text-muted" />
+                <span className="text-text-secondary">dhakshinmahesh1@gmail.com</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <MapPin size={16} className="text-accent" />
-                <span className="text-muted">Kochi, Kerala, India</span>
+                <MapPin size={16} className="text-muted" />
+                <span className="text-text-secondary">Kochi, Kerala, India</span>
               </div>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             <input
               type="text"
-              placeholder="Your name"
+              placeholder="Name"
               required
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-white placeholder-muted/60 text-sm focus:outline-none focus:border-accent/50 transition-colors"
+              className="w-full px-4 py-3 rounded-xl bg-white border border-border text-text placeholder-muted text-sm focus:outline-none focus:ring-2 focus:ring-accent/10 focus:border-accent/30 transition-all"
             />
             <input
               type="email"
-              placeholder="Your email"
+              placeholder="Email"
               required
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-white placeholder-muted/60 text-sm focus:outline-none focus:border-accent/50 transition-colors"
+              className="w-full px-4 py-3 rounded-xl bg-white border border-border text-text placeholder-muted text-sm focus:outline-none focus:ring-2 focus:ring-accent/10 focus:border-accent/30 transition-all"
             />
             <textarea
-              placeholder="Your message"
+              placeholder="Message"
               required
-              rows={5}
+              rows={4}
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl bg-surface border border-border text-white placeholder-muted/60 text-sm focus:outline-none focus:border-accent/50 transition-colors resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-white border border-border text-text placeholder-muted text-sm focus:outline-none focus:ring-2 focus:ring-accent/10 focus:border-accent/30 transition-all resize-none"
             />
             <button
               type="submit"
               disabled={sending}
-              className="w-full py-3 rounded-xl bg-accent text-white font-medium hover:bg-accent-light transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-xl bg-accent text-white text-sm font-medium hover:bg-accent-light transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {sending ? (
                 <><Loader2 size={16} className="animate-spin" /> Sending...</>
               ) : sent ? (
                 'Sent!'
               ) : (
-                <><Send size={16} /> Send Message</>
+                <><Send size={16} /> Send</>
               )}
             </button>
           </form>

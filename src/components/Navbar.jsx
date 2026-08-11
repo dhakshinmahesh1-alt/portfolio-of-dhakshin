@@ -22,13 +22,13 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-surface/80 backdrop-blur-xl border-b border-border shadow-lg shadow-black/20'
+          ? 'bg-white/80 backdrop-blur-xl border-b border-border shadow-sm'
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="text-lg font-bold text-white tracking-tight">
-          Dhakshin<span className="text-accent">.</span>
+      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#" className="text-base font-semibold text-text tracking-tight">
+          Dhakshin<span className="text-muted">.</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -36,7 +36,7 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-muted hover:text-white transition-colors"
+              className="text-sm text-muted hover:text-text transition-colors"
             >
               {l.label}
             </a>
@@ -45,28 +45,28 @@ export default function Navbar() {
             href="https://github.com/agni-007"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm px-4 py-2 rounded-lg bg-accent/10 text-accent border border-accent/20 hover:bg-accent/20 transition-all"
+            className="text-sm px-4 py-2 rounded-full bg-accent text-white hover:bg-accent-light transition-all"
           >
             GitHub
           </a>
         </div>
 
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-text"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden bg-surface-2/95 backdrop-blur-xl border-b border-border px-6 pb-4">
+        <div className="md:hidden bg-white/95 backdrop-blur-xl border-b border-border px-6 pb-4">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setMobileOpen(false)}
-              className="block py-3 text-muted hover:text-white transition-colors border-b border-border/50 last:border-0"
+              className="block py-3 text-muted hover:text-text transition-colors border-b border-border/50 last:border-0"
             >
               {l.label}
             </a>
