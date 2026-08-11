@@ -4,60 +4,40 @@ import { GitHubIcon } from './Icons'
 
 const projects = [
   {
-    title: 'Gesture-Controlled Drone',
-    description: 'A drone controlled through hand gestures using computer vision and embedded systems.',
-    tags: ['Python', 'ESP32', 'OpenCV', 'IoT'],
-    github: 'https://github.com/agni-007/Gesture-controlled-drone',
+    title: 'Bess H1',
+    description: 'An AI assistant app built with API keys — my first project.',
+    tags: ['AI', 'API', 'Web'],
+    live: 'https://bess-h1.vercel.app',
   },
   {
-    title: 'Pico ChromaStrike',
-    description: 'A fast-paced 1D rhythm-defense arcade game for Raspberry Pi Pico 2 using NeoPixel LEDs.',
-    tags: ['Arduino C++', 'NeoPixel', 'Raspberry Pi Pico'],
-    github: 'https://github.com/agni-007/pico-chromastrike_game',
+    title: 'Lux AI',
+    description: 'A more advanced AI app with better features and cleaner design.',
+    tags: ['AI', 'API', 'Web'],
+    live: 'https://lux-ai.vercel.app',
   },
   {
-    title: 'ConvertX',
-    description: 'Universal offline file converter. Supports audio, video, image, and document formats.',
-    tags: ['Flutter', 'Dart', 'ffmpeg'],
-    github: 'https://github.com/agni-007/ConvertX',
-    extra: 'https://github.com/agni-007/ConvertX-Android',
-    extraLabel: 'Android',
+    title: 'KVXX AI',
+    description: 'An AI focused on gaming — built for gamers, by a gamer.',
+    tags: ['AI', 'Gaming', 'API'],
+    live: 'https://vaano-v1.vercel.app',
   },
   {
-    title: 'Sense-AI',
-    description: 'Agentic AI that classifies customer requests across platforms into priority-based queues.',
-    tags: ['React', 'AI/ML', 'Node.js'],
-    github: 'https://github.com/agni-007/Sense-Ai',
+    title: 'Vaano App',
+    description: 'An editor app I built for creative work.',
+    tags: ['Editor', 'Web', 'Creative'],
+    live: 'https://vaano-v1.vercel.app',
   },
   {
-    title: 'Handwritten Digit Recognition',
-    description: 'SVM classifier with PCA for dimensionality reduction. Full pipeline from binarization to prediction.',
-    tags: ['Python', 'Scikit-learn', 'PCA', 'SVM'],
-    github: 'https://github.com/agni-007/Hand-written-digits-recognition',
+    title: 'Everything Workspace',
+    description: 'A workspace tool — another project I built.',
+    tags: ['Productivity', 'Web'],
+    live: 'https://everything-workspace.vercel.app',
   },
   {
-    title: 'Multi-Constellation GNSS Evaluator',
-    description: 'Real-time GNSS receiver evaluation using multi-parameter scoring on ESP32 and Raspberry Pi.',
-    tags: ['ESP32', 'Raspberry Pi', 'IoT'],
-    github: 'https://github.com/agni-007/Multi-Constellation-GNSS-evaluator',
-  },
-  {
-    title: 'MQTT Smart Home',
-    description: 'Virtual smart home using MQTT protocol. ESP32 sensor data, Node-RED dashboard, mobile app control.',
-    tags: ['MQTT', 'ESP32', 'Node-RED', 'IoT'],
-    github: 'https://github.com/agni-007/MQTT-Virtual-smart-home',
-  },
-  {
-    title: 'Maze Solver Bot',
-    description: 'Autonomous maze-solving robot using pathfinding algorithms.',
-    tags: ['Arduino', 'Robotics', 'C++'],
-    github: 'https://github.com/agni-007/Maze-solver-bot',
-  },
-  {
-    title: 'Event Ticketing',
-    description: 'Live event ticketing and attendance management platform.',
-    tags: ['React', 'Node.js', 'Full-Stack'],
-    github: 'https://github.com/agni-007/Event-ticketing-live',
+    title: 'This Portfolio',
+    description: 'The site you\'re looking at right now. Built with React, Vite, and Tailwind.',
+    tags: ['React', 'Vite', 'Tailwind'],
+    github: 'https://github.com/dhakshinmahesh1-alt/portfolio-of-dhakshin',
   },
 ]
 
@@ -102,22 +82,24 @@ export default function Projects() {
               </div>
 
               <div className="flex items-center gap-3 pt-3 border-t border-border/50">
-                <a
-                  href={p.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-xs text-muted hover:text-white transition-colors"
-                >
-                  <GitHubIcon /> Code
-                </a>
-                {p.extra && (
+                {p.github && (
                   <a
-                    href={p.extra}
+                    href={p.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 text-xs text-muted hover:text-white transition-colors"
                   >
-                    <ExternalLink size={14} /> {p.extraLabel}
+                    <GitHubIcon /> Code
+                  </a>
+                )}
+                {p.live && (
+                  <a
+                    href={p.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-xs text-muted hover:text-white transition-colors"
+                  >
+                    <ExternalLink size={14} /> Live
                   </a>
                 )}
               </div>

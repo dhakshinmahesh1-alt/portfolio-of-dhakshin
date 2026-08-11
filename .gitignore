@@ -44,3 +44,4 @@ coverage/
 *.p12
 *.key
 *.cert
+.vercel

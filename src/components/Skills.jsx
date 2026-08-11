@@ -2,28 +2,28 @@ import { motion } from 'framer-motion'
 
 const skills = [
   {
+    category: 'Hardware',
+    items: ['LED Strips', 'RC Cars', 'Motors', 'Soldering', 'Circuit Building', 'Repairing'],
+  },
+  {
     category: 'Languages',
-    items: ['Python', 'JavaScript', 'TypeScript', 'C++', 'Dart', 'Java'],
+    items: ['Python', 'JavaScript', 'HTML/CSS', 'Dart'],
   },
   {
     category: 'Frameworks',
-    items: ['React', 'Node.js', 'Flutter', 'Tailwind CSS', 'FastAPI'],
+    items: ['React', 'Flutter', 'Node.js', 'Tailwind CSS'],
   },
   {
-    category: 'Hardware',
-    items: ['Arduino', 'ESP32', 'Raspberry Pi', 'Teensy', 'NeoPixel'],
+    category: 'AI / APIs',
+    items: ['OpenAI API', 'REST APIs', 'AI App Building'],
   },
   {
     category: 'Tools',
-    items: ['Git', 'Docker', 'Linux', 'Figma', 'Vercel'],
-  },
-  {
-    category: 'AI/ML',
-    items: ['TensorFlow', 'OpenCV', 'Scikit-learn', 'Pandas'],
+    items: ['Git', 'Vercel', 'VS Code', 'Figma'],
   },
   {
     category: 'Other',
-    items: ['MQTT', 'Node-RED', 'ffmpeg', 'Drizzle ORM'],
+    items: ['Skating', 'Cycling', 'Tinkering', 'Fixing Stuff'],
   },
 ]
 

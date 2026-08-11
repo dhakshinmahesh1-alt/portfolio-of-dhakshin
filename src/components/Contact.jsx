@@ -10,7 +10,6 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setSending(true)
-    // Simulate send
     await new Promise((r) => setTimeout(r, 1500))
     setSending(false)
     setSent(true)
@@ -42,11 +41,11 @@ export default function Contact() {
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-sm">
                 <Mail size={16} className="text-accent" />
-                <span className="text-muted">dhakshin@example.com</span>
+                <span className="text-muted">dhakshinmahesh1@gmail.com</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <MapPin size={16} className="text-accent" />
-                <span className="text-muted">India</span>
+                <span className="text-muted">Kochi, Kerala, India</span>
               </div>
             </div>
           </div>

@@ -18,27 +18,34 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-12 text-left">
           <div className="space-y-4 text-muted leading-relaxed">
             <p>
-              I'm Dhakshin — a developer who likes building things from scratch. Whether it's
-              a gesture-controlled drone, a Raspberry Pi game, or a full-stack web app, I enjoy
-              the process of turning ideas into working products.
+              I'm Dhakshin — a 13-year-old student at St. Paul's International School in Kochi, Kerala.
+              I love hardware — repairing broken stuff, building new things, and tinkering with RC cars,
+              LED strips, and motors.
             </p>
             <p>
-              My interests span across IoT, embedded systems, AI/ML, and web development.
-              I've participated in hackathons and built projects that solve real problems —
-              from smart home automation to accessibility tools.
+              When I'm not soldering circuits, I build AI apps and web tools. I also enjoy skating
+              (it's actually a subject at school!) and cycling. Oh, and my favorite color is black.
+            </p>
+            <p>
+              This portfolio is where I showcase the things I've built — from hardware projects
+              to AI apps and web tools. Most of my hardware work wasn't photographed, so you'll
+              mostly see my software projects here.
             </p>
           </div>
 
           <div className="space-y-4">
             {[
-              { label: 'Focus', value: 'IoT, AI/ML, Full-Stack' },
-              { label: 'Stack', value: 'React, Python, Flutter, Arduino' },
-              { label: 'Location', value: 'India' },
-              { label: 'Status', value: 'Building & Learning' },
+              { label: 'Name', value: 'Dhakshin Mahesh' },
+              { label: 'Age', value: '13 years old' },
+              { label: 'School', value: "St. Paul's International School" },
+              { label: 'Class', value: '7th Standard' },
+              { label: 'Location', value: 'Kochi, Kerala, India' },
+              { label: 'Focus', value: 'Hardware, AI Apps, Web Tools' },
+              { label: 'Hobbies', value: 'Skating, Cycling, Tinkering' },
             ].map((item) => (
               <div key={item.label} className="flex justify-between items-center py-2 border-b border-border/50">
                 <span className="text-sm text-muted">{item.label}</span>
-                <span className="text-sm text-white font-medium">{item.value}</span>
+                <span className="text-sm text-white font-medium text-right">{item.value}</span>
               </div>
             ))}
           </div>
