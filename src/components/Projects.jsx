@@ -9,7 +9,6 @@ const projects = [
     description: 'An AI assistant app built with API keys — my first project.',
     tags: ['AI', 'API', 'Web'],
     live: 'https://bess-h1.vercel.app',
-    color: '#ef4444',
     spin: 3,
   },
   {
@@ -17,7 +16,6 @@ const projects = [
     description: 'A more advanced AI app with better features and cleaner design.',
     tags: ['AI', 'API', 'Web'],
     live: 'https://lux-ai.vercel.app',
-    color: '#a855f7',
     spin: -2,
   },
   {
@@ -25,7 +23,6 @@ const projects = [
     description: 'An AI focused on gaming — built for gamers, by a gamer.',
     tags: ['AI', 'Gaming', 'API'],
     live: 'https://vaano-v1.vercel.app',
-    color: '#22d3ee',
     spin: 4,
   },
   {
@@ -33,7 +30,6 @@ const projects = [
     description: 'An editor app I built for creative work.',
     tags: ['Editor', 'Web', 'Creative'],
     live: 'https://vaano-v1.vercel.app',
-    color: '#22c55e',
     spin: -3,
   },
   {
@@ -41,7 +37,6 @@ const projects = [
     description: 'A workspace tool — another project I built.',
     tags: ['Productivity', 'Web'],
     live: 'https://everything-workspace.vercel.app',
-    color: '#f59e0b',
     spin: 2,
   },
   {
@@ -49,7 +44,6 @@ const projects = [
     description: "The site you're looking at right now.",
     tags: ['React', 'Vite', 'Tailwind'],
     github: 'https://github.com/dhakshinmahesh1-alt/portfolio-of-dhakshin',
-    color: '#ec4899',
     spin: -4,
   },
 ]
@@ -123,10 +117,7 @@ export default function Projects() {
                 {/* macOS Calendar Card */}
                 <div className="bg-white rounded-2xl shadow-lg shadow-black/15 overflow-hidden cursor-default group-hover:shadow-xl transition-shadow">
                   {/* Colored header — like macOS calendar date */}
-                  <div
-                    className="px-5 pt-4 pb-3 relative overflow-hidden"
-                    style={{ backgroundColor: p.color }}
-                  >
+                  <div className="px-5 pt-4 pb-3 relative overflow-hidden rgb-header">
                     {/* Subtle pattern overlay */}
                     <div className="absolute inset-0 opacity-10" style={{
                       backgroundImage: 'radial-gradient(circle at 20% 80%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)',
