@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, MapPin } from 'lucide-react'
+import { Mail, MapPin, Send } from 'lucide-react'
 import { PaperPlane, Gear, Screw, Bolt } from './Illustrations'
 
 const GitHubIcon = () => (
@@ -54,13 +54,13 @@ export default function Contact() {
         className="max-w-3xl mx-auto relative z-10"
       >
         <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">Contact</p>
-        <h2 className="text-3xl md:text-4xl font-bold text-text mb-10 tracking-tight">Get in touch</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-text mb-4 tracking-tight">Let's build something</h2>
+        <p className="text-text-secondary text-sm mb-12 max-w-md">
+          Have a project idea, want to collaborate, or just want to say hi? I'd love to hear from you.
+        </p>
 
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-6">
-            <p className="text-text-secondary leading-relaxed">
-              Have a project idea, want to collaborate, or just want to say hi? Drop me a message.
-            </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm">
                 <Mail size={16} className="text-muted" />
@@ -100,7 +100,7 @@ export default function Contact() {
               className="w-full px-4 py-3 rounded-xl bg-white border border-border text-text placeholder-muted text-sm focus:outline-none focus:ring-2 focus:ring-text/5 focus:border-text/20 transition-all resize-none" />
             <button type="submit"
               className="w-full py-3 rounded-xl bg-text text-white text-sm font-medium hover:bg-text/80 transition-colors flex items-center justify-center gap-2">
-              {sent ? '✓ Opened Email Client' : '✉️ Send Message'}
+              {sent ? '✓ Opened Email Client' : <><Send size={14} /> Send Message</>}
             </button>
             <p className="text-[10px] text-muted text-center">Opens your email client with the message pre-filled</p>
           </form>

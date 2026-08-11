@@ -5,6 +5,13 @@ import { PaperPlane, Pencil, Motor, Gear, Lightbulb, Chip, Wrench, Resistor, Scr
 import TypingEffect from './TypingEffect'
 import { RGBBorder } from './RGBGlow'
 
+const categories = [
+  { icon: '⚡', label: 'Electronics' },
+  { icon: '🤖', label: 'Robotics' },
+  { icon: '💻', label: 'Coding' },
+  { icon: '🛠️', label: 'Making' },
+]
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6 bg-[#f0f0f0] overflow-hidden">
@@ -76,17 +83,31 @@ export default function Hero() {
           <br />
           <span className="text-muted">Mahesh</span>
         </h1>
-        <p className="text-base md:text-lg text-text-secondary max-w-md mx-auto mb-12 leading-relaxed">
+        <p className="text-base md:text-lg text-text-secondary max-w-md mx-auto mb-10 leading-relaxed">
           13-year-old student who loves tinkering with hardware — RC cars, LED strips,
           motors, and fixing broken stuff.
         </p>
 
+        {/* Category pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="flex items-center justify-center gap-3 mb-10 flex-wrap"
+        >
+          {categories.map((c, i) => (
+            <span key={c.label} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-border/60 text-sm text-text-secondary font-medium shadow-sm">
+              <span>{c.icon}</span> {c.label}
+            </span>
+          ))}
+        </motion.div>
+
         <div className="flex items-center justify-center gap-4 mb-16">
-          <a href="#projects" className="px-6 py-3 rounded-full bg-text text-white text-sm font-medium hover:bg-text/80 transition-colors">
-            View Projects
+          <a href="#projects" className="px-6 py-3 rounded-full bg-text text-white text-sm font-medium hover:bg-text/80 transition-colors shadow-lg shadow-black/10">
+            Explore My Projects
           </a>
-          <a href="#contact" className="px-6 py-3 rounded-full border border-border text-text text-sm font-medium hover:bg-white transition-colors">
-            Contact
+          <a href="#about" className="px-6 py-3 rounded-full border border-border text-text text-sm font-medium hover:bg-white transition-colors">
+            About Me
           </a>
         </div>
 
