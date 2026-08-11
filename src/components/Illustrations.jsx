@@ -92,3 +92,45 @@ export function Wrench({ className = '', size = 55 }) {
     </svg>
   )
 }
+
+export function Resistor({ className = '', size = 50 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" className={className}>
+      <line x1="5" y1="50" x2="20" y2="50" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M20 50L25 35L35 65L45 35L55 65L65 35L75 65L80 50" stroke="#94a3b8" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+      <line x1="80" y1="50" x2="95" y2="50" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+export function Screw({ className = '', size = 40 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" className={className}>
+      <circle cx="50" cy="50" r="25" stroke="#94a3b8" strokeWidth="2.5" fill="#e2e8f0"/>
+      <circle cx="50" cy="50" r="18" stroke="#94a3b8" strokeWidth="1.5" fill="none"/>
+      <line x1="38" y1="50" x2="62" y2="50" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round"/>
+      <line x1="50" y1="38" x2="50" y2="62" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+export function Bolt({ className = '', size = 35 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" className={className}>
+      <polygon points="50,5 62,35 95,38 70,60 78,95 50,75 22,95 30,60 5,38 38,35" stroke="#94a3b8" strokeWidth="2" fill="#fef3c7" strokeLinejoin="round"/>
+      <circle cx="50" cy="50" r="10" fill="#f9fafb" stroke="#94a3b8" strokeWidth="2"/>
+    </svg>
+  )
+}
+
+export function Soldering({ className = '', size = 55 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" className={className}>
+      <line x1="10" y1="80" x2="55" y2="35" stroke="#94a3b8" strokeWidth="3" strokeLinecap="round"/>
+      <circle cx="60" cy="30" r="6" fill="#fbbf24" stroke="#94a3b8" strokeWidth="2"/>
+      <path d="M60 36L60 45" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round"/>
+      <circle cx="62" cy="25" r="2" fill="#ef4444" opacity="0.6"/>
+      <path d="M65 20C68 15 72 18 70 22" stroke="#94a3b8" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="2 3"/>
+    </svg>
+  )
+}

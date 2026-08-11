@@ -1,26 +1,21 @@
 import { motion } from 'framer-motion'
-import { PaperPlane, Motor, Gear } from './Illustrations'
+import { PaperPlane, Motor, Screw, Bolt } from './Illustrations'
 
 export default function About() {
   return (
     <section id="about" className="py-32 px-6 bg-white relative overflow-hidden">
-      {/* Subtle background illustrations */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.15 }}
-          viewport={{ once: true }}
-          className="absolute top-10 right-[10%] rotate-12"
-        >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.15 }} viewport={{ once: true }} className="absolute top-10 right-[10%] rotate-12">
           <PaperPlane size={100} />
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.12 }}
-          viewport={{ once: true }}
-          className="absolute bottom-10 left-[5%] -rotate-20"
-        >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.12 }} viewport={{ once: true }} className="absolute bottom-10 left-[5%] -rotate-20">
           <Motor size={80} />
+        </motion.div>
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.1 }} viewport={{ once: true }} className="absolute top-[40%] left-[2%] rotate-30">
+          <Screw size={35} />
+        </motion.div>
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.08 }} viewport={{ once: true }} className="absolute bottom-[20%] right-[3%] -rotate-15">
+          <Bolt size={30} />
         </motion.div>
       </div>
 
@@ -32,9 +27,7 @@ export default function About() {
         className="max-w-3xl mx-auto relative z-10"
       >
         <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">About</p>
-        <h2 className="text-3xl md:text-4xl font-bold text-text mb-10 tracking-tight">
-          A bit about me
-        </h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-text mb-10 tracking-tight">A bit about me</h2>
 
         <div className="space-y-6 text-text-secondary leading-relaxed">
           <p>
