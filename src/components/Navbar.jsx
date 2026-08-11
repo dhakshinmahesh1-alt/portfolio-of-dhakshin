@@ -27,7 +27,8 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="text-base font-semibold text-text tracking-tight">
+        <a href="#" className="flex items-center gap-2 text-base font-semibold text-text tracking-tight">
+          <img src="/favicon.svg" alt="Logo" className="w-7 h-7 rounded-lg" />
           Dhakshin<span className="text-muted">.</span>
         </a>
 
