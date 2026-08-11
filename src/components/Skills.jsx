@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import { Gear, Wrench, Lightbulb, Soldering, Resistor } from './Illustrations'
+import SkillBars from './SkillBars'
 
-const skills = [
+const categories = [
   { category: 'Vibecoding', items: ['Claude Code', 'Codex', 'OpenCode', 'AI-Assisted Coding'] },
   { category: 'Hardware', items: ['LED Strips', 'RC Cars', 'Motors', 'Soldering', 'Circuit Building', 'Repairing'] },
   { category: 'Platforms', items: ['Vercel', 'GitHub', 'Firebase', 'Supabase'] },
@@ -41,8 +42,14 @@ export default function Skills() {
           I don't write code the traditional way — I vibe it into existence with AI.
         </p>
 
+        {/* Animated skill bars */}
+        <div className="mb-12">
+          <SkillBars />
+        </div>
+
+        {/* Skill category cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {skills.map((s, i) => (
+          {categories.map((s, i) => (
             <motion.div
               key={s.category}
               initial={{ opacity: 0, y: 10 }}
@@ -54,7 +61,7 @@ export default function Skills() {
               <h3 className="text-xs font-semibold text-muted mb-3 uppercase tracking-wider">{s.category}</h3>
               <div className="flex flex-wrap gap-1.5">
                 {s.items.map((item) => (
-                  <span key={item} className="text-xs px-2.5 py-1 rounded-full bg-white text-text-secondary border border-border/50">
+                  <span key={item} className="text-xs px-2.5 py-1 rounded-full bg-white text-text-secondary border border-border/50 hover:border-accent/30 hover:text-text transition-colors cursor-default">
                     {item}
                   </span>
                 ))}
