@@ -1,14 +1,35 @@
 import { motion } from 'framer-motion'
+import { PaperPlane, Motor, Gear } from './Illustrations'
 
 export default function About() {
   return (
-    <section id="about" className="py-32 px-6">
+    <section id="about" className="py-32 px-6 bg-white relative overflow-hidden">
+      {/* Subtle background illustrations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.15 }}
+          viewport={{ once: true }}
+          className="absolute top-10 right-[10%] rotate-12"
+        >
+          <PaperPlane size={100} />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.12 }}
+          viewport={{ once: true }}
+          className="absolute bottom-10 left-[5%] -rotate-20"
+        >
+          <Motor size={80} />
+        </motion.div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.6 }}
-        className="max-w-3xl mx-auto"
+        className="max-w-3xl mx-auto relative z-10"
       >
         <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">About</p>
         <h2 className="text-3xl md:text-4xl font-bold text-text mb-10 tracking-tight">
@@ -34,7 +55,7 @@ export default function About() {
             { label: 'Location', value: 'Kochi' },
             { label: 'Focus', value: 'Hardware' },
           ].map((item) => (
-            <div key={item.label} className="text-center p-4 rounded-2xl bg-surface-2 border border-border/50">
+            <div key={item.label} className="text-center p-5 rounded-2xl bg-[#f0f0f0] border border-border/50">
               <p className="text-2xl font-bold text-text">{item.value}</p>
               <p className="text-xs text-muted mt-1">{item.label}</p>
             </div>
