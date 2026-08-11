@@ -6,11 +6,11 @@ import ExpandableDetails from './ExpandableDetails'
 import ToolBelt from './ToolBelt'
 
 const facts = [
-  { icon: '🔧', title: 'Soldering Iron', text: 'I can solder tiny SMD components — the smaller the better.' },
+  { icon: '🔧', title: 'Fixer', text: 'I fix broken fans, toys, remotes, and anything with a motor or wire.' },
   { icon: '🏎️', title: 'RC Cars', text: 'I have built and modified multiple RC cars from scratch.' },
-  { icon: '💡', title: 'LED Addict', text: 'I once lit up my entire room with 200+ addressable LEDs.' },
-  { icon: '🤖', title: 'Drone Builder', text: 'I built a gesture-controlled drone using ESP32 and Python.' },
-  { icon: '🎮', title: 'Game Dev', text: 'I made a rhythm game that runs on a Raspberry Pi Pico with LEDs.' },
+  { icon: '💡', title: 'LED Addict', text: 'I love putting LED strips everywhere — my room, my bike, my projects.' },
+  { icon: '🎮', title: 'Game Dev', text: 'I built a rhythm game that runs on a Raspberry Pi Pico with LEDs.' },
+  { icon: '🧰', title: 'Junk Collector', text: 'I keep broken electronics for parts — motors, gears, wires, wheels.' },
   { icon: '⚡', title: 'Power Tools', text: 'I can fix anything with a motor — fans, toys, even kitchen appliances.' },
 ]
 
@@ -64,19 +64,16 @@ export default function FunFacts() {
           ))}
         </div>
 
-        {/* Tool Belt */}
         <div className="mb-10">
           <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">My Toolkit</p>
           <ToolBelt />
         </div>
 
-        {/* Expandable Hardware Details */}
         <div className="mb-10">
-          <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">Deep Dives</p>
+          <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">How I Work</p>
           <ExpandableDetails />
         </div>
 
-        {/* Random quote and hardware fact */}
         <div className="grid sm:grid-cols-2 gap-4">
           <RandomQuote />
           <RandomFact />

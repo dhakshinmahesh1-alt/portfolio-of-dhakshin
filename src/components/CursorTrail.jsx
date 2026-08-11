@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react'
 export default function CursorTrail() {
   const canvasRef = useRef(null)
   const pointsRef = useRef([])
-  const mouseRef = useRef({ x: 0, y: 0 })
   const hueRef = useRef(0)
 
   useEffect(() => {
@@ -19,15 +18,15 @@ export default function CursorTrail() {
     window.addEventListener('resize', resize)
 
     const handleMove = (e) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY }
+      hueRef.current = (hueRef.current + 1.5) % 360
       pointsRef.current.push({
         x: e.clientX,
         y: e.clientY,
         age: 0,
         hue: hueRef.current,
       })
-      hueRef.current = (hueRef.current + 2) % 360
-      if (pointsRef.current.length > 50) pointsRef.current.shift()
+      // Keep only last 20 points — shorter trail
+      if (pointsRef.current.length > 20) pointsRef.current.shift()
     }
 
     window.addEventListener('mousemove', handleMove)
@@ -38,7 +37,7 @@ export default function CursorTrail() {
       const pts = pointsRef.current
       for (let i = pts.length - 1; i >= 0; i--) {
         pts[i].age++
-        if (pts[i].age > 20) {
+        if (pts[i].age > 15) {
           pts.splice(i, 1)
         }
       }
@@ -54,13 +53,17 @@ export default function CursorTrail() {
       for (let i = 1; i < pts.length; i++) {
         const p0 = pts[i - 1]
         const p1 = pts[i]
-        const life = 1 - p1.age / 20
-        const width = life * 4
+        const life = 1 - p1.age / 15
+        const width = life * 3
+
+        // Smooth curve through points
+        const mx = (p0.x + p1.x) / 2
+        const my = (p0.y + p1.y) / 2
 
         ctx.beginPath()
         ctx.moveTo(p0.x, p0.y)
-        ctx.lineTo(p1.x, p1.y)
-        ctx.strokeStyle = `hsla(${p1.hue}, 80%, 60%, ${life * 0.7})`
+        ctx.quadraticCurveTo(p0.x, p0.y, mx, my)
+        ctx.strokeStyle = `hsla(${p1.hue}, 70%, 60%, ${life * 0.5})`
         ctx.lineWidth = width
         ctx.stroke()
       }

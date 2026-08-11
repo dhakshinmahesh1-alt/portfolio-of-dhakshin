@@ -4,39 +4,39 @@ import { motion, AnimatePresence } from 'framer-motion'
 const details = [
   {
     icon: '🔩',
-    title: 'How I Solder',
-    short: 'My soldering technique',
-    content: 'I use a TS101 soldering iron at 320°C for lead-free solder. For SMD components, I use the drag soldering method with flux. The key is patience — heat the pad, not the component.',
+    title: 'Fixing Broken Stuff',
+    short: 'How I approach repairs',
+    content: 'I start by opening it up, identifying what broke, then figure out how to fix it with what I have. Hot glue and tape solve 90% of problems. The rest needs actual replacement parts.',
   },
   {
     icon: '⚡',
     title: 'LED Wiring',
     short: 'How I wire LED strips',
-    content: 'WS2812B strips need 3 wires: 5V, Data, and Ground. I always add a 330Ω resistor on the data line and a 1000µF capacitor across power. For long runs, inject power every 50 LEDs.',
+    content: 'Just 3 wires: 5V (red), Data (green), Ground (black). Connect to any 5V power source. Use a phone charger or USB cable. Data goes to any microcontroller pin.',
   },
   {
     icon: '🏎️',
     title: 'RC Car Mods',
     short: 'My modification process',
-    content: 'I start with a brushed motor car, swap to brushless, upgrade the ESC, add a gyro for stability, and 3D print custom body shells. My fastest car hits 60km/h!',
+    content: 'Start by opening the car, see what motor it uses, then swap for a faster one. Add better wheels, tune the steering. The best mod is just adding a bigger battery.',
   },
   {
     icon: '🔧',
-    title: 'Tools I Use',
-    short: 'Essential hardware toolkit',
-    content: 'TS101 soldering iron, FNIRSI multimeter, mini wire stripper, helping hands with magnifier, flux paste, solder wick, and a cheap oscilloscope. Total cost: under ₹5000.',
+    title: 'My Real Tools',
+    short: 'What I actually use',
+    content: 'Scissors, screwdrivers, electrical tape, hot glue gun, and whatever I can find around the house. No fancy equipment — just creativity and whatever works.',
   },
   {
     icon: '💡',
     title: 'LED Patterns',
     short: 'My favorite effects',
-    content: 'Rainbow chase, breathing pulse, music reactive (using MSGEQ7), fire simulation, and matrix rain. All controlled via ESP32 with WLED firmware.',
+    content: 'Breathing pulse, rainbow chase, music reactive, fire effect. Most cheap LED strips from Amazon come with a remote that already has these built in.',
   },
   {
-    icon: '🤖',
-    title: 'Drone Build',
-    short: 'Gesture control system',
-    content: 'ESP32 reads MPU6050 gyroscope data from a hand-mounted controller. Maps pitch/roll/yaw to motor speeds. Uses nRF24L01 for wireless communication at 2.4GHz.',
+    icon: '🧰',
+    title: 'Junk → treasure',
+    short: 'How I find parts',
+    content: 'Broken toys, old electronics, dead fans, discarded gadgets — I take them apart for motors, gears, wheels, wires, and plastic parts. Free components everywhere.',
   },
 ]
 
@@ -57,7 +57,7 @@ export default function ExpandableDetails() {
             onClick={() => setOpen(open === i ? null : i)}
             className={`w-full text-left p-4 rounded-2xl border transition-all duration-300 ${
               open === i
-                ? 'bg-white border-accent/20 shadow-lg shadow-accent/5'
+                ? 'bg-white border-text/20 shadow-lg shadow-text/5'
                 : 'bg-[#f0f0f0] border-border/50 hover:shadow-md hover:border-border'
             }`}
           >

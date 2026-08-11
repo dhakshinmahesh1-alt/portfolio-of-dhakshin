@@ -2,16 +2,14 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const tools = [
-  { name: 'TS101 Iron', icon: '🔧', desc: 'My soldering iron — 320°C, portable, USB-C powered' },
-  { name: 'Multimeter', icon: '📊', desc: 'FNIRSI DMT-99 — measures voltage, current, resistance' },
-  { name: 'Wire Stripper', icon: '✂️', desc: 'Mini automatic wire stripper — handles 24-30 AWG' },
-  { name: 'Helping Hands', icon: '🤝', desc: 'Magnifier + alligator clips — holds PCBs while soldering' },
-  { name: 'Flux Paste', icon: '🧴', desc: 'Amtech NC-559-V2 — makes solder flow like butter' },
-  { name: 'Solder Wick', icon: '🧵', desc: 'Desoldering braid — fixes mistakes cleanly' },
-  { name: 'ESP32', icon: '🧠', desc: 'Dual-core 240MHz — my go-to microcontroller' },
-  { name: 'NeoPixels', icon: '💡', desc: 'WS2812B addressable LEDs — 16.7M colors each' },
-  { name: 'Oscilloscope', icon: '📈', desc: 'See signal waveforms — debug I2C, SPI, PWM' },
-  { name: '3D Printer', icon: '🖨️', desc: 'Custom parts — motor mounts, enclosures, gears' },
+  { name: 'Scissors', icon: '✂️', desc: 'Cut wires, trim insulation, strip cables — my most used tool' },
+  { name: 'Screwdrivers', icon: '🪛', desc: 'Phillips and flathead set — opens anything from toys to electronics' },
+  { name: 'Screws', icon: '🔩', desc: 'M2, M3, M4 assorted — I keep every screw I find from broken stuff' },
+  { name: 'Tape', icon: '📎', desc: 'Electrical tape + masking tape — insulate connections, hold things together' },
+  { name: 'Wire Cutters', icon: '🔧', desc: 'Flush cutters for clean cuts on component leads and wires' },
+  { name: 'Hot Glue Gun', icon: '🧴', desc: 'Quick mounting, insulating, and fixing broken plastic parts' },
+  { name: 'Sandpaper', icon: '📄', desc: 'Smooth rough edges on 3D prints and cut plastic' },
+  { name: 'Ruler', icon: '📏', desc: 'Measure twice, cut once — essential for any project' },
 ]
 
 export default function ToolBelt() {
@@ -27,8 +25,8 @@ export default function ToolBelt() {
             onClick={() => setSelected(selected === i ? null : i)}
             className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium transition-all border ${
               selected === i
-                ? 'bg-accent text-white border-accent shadow-md shadow-accent/20'
-                : 'bg-white border-border text-text hover:border-accent/30 hover:shadow-sm'
+                ? 'bg-text text-white border-text shadow-md'
+                : 'bg-white border-border text-text hover:border-text/30 hover:shadow-sm'
             }`}
           >
             <span>{t.icon}</span>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 
 const quotes = [
   { text: "The best way to predict the future is to invent it.", author: "Alan Kay" },
@@ -6,26 +6,26 @@ const quotes = [
   { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
   { text: "Stay hungry, stay foolish.", author: "Stewart Brand" },
   { text: "Move fast and break things.", author: "Mark Zuckerberg" },
-  { text: "Hardware is the soup, software is the spice.", author: "Unknown" },
   { text: "Every great developer you know got there by solving problems they were unqualified to solve.", author: "Patrick McKenzie" },
   { text: "The best error message is the one that never shows up.", author: "Thomas Fuchs" },
+  { text: "First, solve the problem. Then, write the code.", author: "John Johnson" },
 ]
 
 const hardwareFacts = [
-  "LED strips use WS2812B chips — each LED has its own IC built in.",
   "A typical RC car motor spins at 30,000+ RPM.",
-  "Solder melts at just 183°C (361°F) for leaded, 217°C for lead-free.",
-  "ESP32 has dual-core 240MHz processors — more powerful than early laptops.",
-  "NeoPixel LEDs can display 16.7 million colors each.",
-  "A drone's flight controller processes sensor data 1000+ times per second.",
-  "PWM (Pulse Width Modulation) controls motor speed by switching power on/off rapidly.",
+  "Solder melts at just 183C for leaded, 217C for lead-free.",
+  "PWM controls motor speed by switching power on/off rapidly.",
   "I2C protocol lets multiple devices communicate with just 2 wires.",
-  "Capacitors can store energy and release it instantly — like a tiny battery.",
-  "The average human eye can detect a single photon of light.",
+  "Capacitors store energy and release it instantly — like a tiny battery.",
+  "Hot glue is the universal fix — it holds, insulates, and fills gaps.",
+  "A 9V battery can power an LED strip for about 2 hours.",
+  "Wire strippers save more time than any other tool.",
+  "Broken toys are the best source of free motors and gears.",
+  "Electrical tape fixes almost anything temporarily.",
 ]
 
 export function RandomQuote() {
-  const [quote, setQuote] = useState(quotes[0])
+  const [quote, setQuote] = useState(quotes[Math.floor(Math.random() * quotes.length)])
   const [key, setKey] = useState(0)
 
   const next = () => {
@@ -50,7 +50,7 @@ export function RandomQuote() {
 }
 
 export function RandomFact() {
-  const [fact, setFact] = useState(hardwareFacts[0])
+  const [fact, setFact] = useState(hardwareFacts[Math.floor(Math.random() * hardwareFacts.length)])
   const [key, setKey] = useState(0)
 
   const next = () => {
