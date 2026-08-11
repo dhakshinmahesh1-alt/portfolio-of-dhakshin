@@ -2,6 +2,8 @@ import { ArrowDown, Mail } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { GitHubIcon, LinkedInIcon } from './Icons'
 import { PaperPlane, Pencil, Motor, Gear, Lightbulb, Chip, Wrench, Resistor, Screw, Bolt, Soldering } from './Illustrations'
+import TypingEffect from './TypingEffect'
+import { RGBBorder } from './RGBGlow'
 
 export default function Hero() {
   return (
@@ -59,9 +61,16 @@ export default function Hero() {
         transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
         className="relative z-10 text-center max-w-2xl"
       >
-        <p className="text-muted font-mono text-xs mb-6 tracking-widest uppercase">
-          The Hardwarer
-        </p>
+        <RGBBorder className="inline-block mb-8">
+          <p className="text-muted font-mono text-xs px-6 py-2 tracking-widest uppercase">
+            <TypingEffect
+              words={['The Hardwarer', 'Hardware Tinkerer', 'Vibecoder', 'LED Enthusiast', 'RC Car Builder']}
+              speed={80}
+              pause={2500}
+            />
+          </p>
+        </RGBBorder>
+
         <h1 className="text-6xl md:text-8xl font-bold text-text leading-none mb-8 tracking-tight">
           Dhakshin
           <br />

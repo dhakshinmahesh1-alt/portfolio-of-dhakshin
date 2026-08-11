@@ -1,0 +1,65 @@
+import { motion } from 'framer-motion'
+import { MemoryGame, ReactionGame } from './MiniGames'
+import { Gear, PaperPlane, Lightbulb } from './Illustrations'
+
+export default function Play() {
+  return (
+    <section className="py-32 px-6 bg-[#f0f0f0] relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.12 }} viewport={{ once: true }} className="absolute top-10 left-[5%] rotate-15">
+          <PaperPlane size={60} />
+        </motion.div>
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.1 }} viewport={{ once: true }} className="absolute bottom-12 right-[6%] -rotate-20">
+          <Gear size={50} />
+        </motion.div>
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.08 }} viewport={{ once: true }} className="absolute top-[50%] right-[3%] rotate-30">
+          <Lightbulb size={45} />
+        </motion.div>
+      </div>
+
+      <div className="max-w-3xl mx-auto relative z-10">
+        <p className="text-muted font-mono text-xs mb-4 tracking-widest uppercase">Play</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-text mb-4 tracking-tight">Take a break</h2>
+        <p className="text-text-secondary text-sm mb-12 max-w-md">
+          A couple of quick games to test your reflexes and memory. You deserve a break.
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-white border border-border rounded-2xl p-6 hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-lg">🧠</span>
+              <h3 className="text-sm font-semibold text-text">Memory Match</h3>
+            </div>
+            <p className="text-xs text-text-secondary mb-4">
+              Match the hardware icons. How few moves can you do it in?
+            </p>
+            <MemoryGame />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-white border border-border rounded-2xl p-6 hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-lg">⚡</span>
+              <h3 className="text-sm font-semibold text-text">Reaction Time</h3>
+            </div>
+            <p className="text-xs text-text-secondary mb-4">
+              How fast are your reflexes? Click as soon as you see green.
+            </p>
+            <ReactionGame />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
