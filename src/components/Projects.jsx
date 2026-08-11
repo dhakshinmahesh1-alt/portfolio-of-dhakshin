@@ -147,14 +147,46 @@ export default function Projects() {
                   </div>
                   <div className="flex items-center gap-3 pt-3 border-t border-[#e0d5c4]/60">
                     {p.github && (
-                      <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-muted hover:text-text transition-colors">
-                        <GitHubIcon /> Code
-                      </a>
+                      <div className="relative group/link">
+                        <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-muted hover:text-text transition-colors">
+                          <GitHubIcon /> Code
+                        </a>
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover/link:opacity-100 transition-all duration-200 pointer-events-none z-50">
+                          <div className="bg-[#1e1e2e] text-white text-[10px] px-3 py-2 rounded-lg shadow-xl whitespace-nowrap font-mono border border-white/10 backdrop-blur-sm">
+                            <div className="flex items-center gap-2 mb-1">
+                              <div className="flex gap-1">
+                                <div className="w-2 h-2 rounded-full bg-red-400/80" />
+                                <div className="w-2 h-2 rounded-full bg-yellow-400/80" />
+                                <div className="w-2 h-2 rounded-full bg-green-400/80" />
+                              </div>
+                              <span className="text-white/40 text-[8px]">GitHub</span>
+                            </div>
+                            <div className="text-green-400/90">{p.github.replace('https://', '')}</div>
+                          </div>
+                          <div className="w-2 h-2 bg-[#1e1e2e] rotate-45 mx-auto -mt-1 border-r border-b border-white/10" />
+                        </div>
+                      </div>
                     )}
                     {p.live && (
-                      <a href={p.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-muted hover:text-text transition-colors">
-                        <ExternalLink size={13} /> Live
-                      </a>
+                      <div className="relative group/link">
+                        <a href={p.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-muted hover:text-text transition-colors">
+                          <ExternalLink size={13} /> Live
+                        </a>
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover/link:opacity-100 transition-all duration-200 pointer-events-none z-50">
+                          <div className="bg-[#1e1e2e] text-white text-[10px] px-3 py-2 rounded-lg shadow-xl whitespace-nowrap font-mono border border-white/10 backdrop-blur-sm">
+                            <div className="flex items-center gap-2 mb-1">
+                              <div className="flex gap-1">
+                                <div className="w-2 h-2 rounded-full bg-red-400/80" />
+                                <div className="w-2 h-2 rounded-full bg-yellow-400/80" />
+                                <div className="w-2 h-2 rounded-full bg-green-400/80" />
+                              </div>
+                              <span className="text-white/40 text-[8px]">Live</span>
+                            </div>
+                            <div className="text-cyan-400/90">{p.live.replace('https://', '')}</div>
+                          </div>
+                          <div className="w-2 h-2 bg-[#1e1e2e] rotate-45 mx-auto -mt-1 border-r border-b border-white/10" />
+                        </div>
+                      </div>
                     )}
                   </div>
                 </div>
