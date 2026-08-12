@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { MemoryGame, ReactionGame, SnakeGame, BreakoutGame, TicTacToe, WhackAMole, SimonSays, FlappyBird, NumberGuess, RCCarGame } from './MiniGames'
+import { MemoryGame, ReactionGame, SnakeGame, BreakoutGame, TicTacToe, WhackAMole, SimonSays, FlappyBird, NumberGuess, RCCarGame } from '../games'
 import { Gear, PaperPlane, Lightbulb } from './Illustrations'
 
 export default function Play() {
@@ -27,6 +27,20 @@ export default function Play() {
         {/* RC Car Game — full width */}
         <div className="mb-6">
           <RCCarGame />
+        </div>
+
+        {/* Snake Game — full width */}
+        <div className="mb-6">
+          <div className="bg-white border border-border rounded-2xl p-5 hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-lg">🐍</span>
+              <h3 className="text-sm font-semibold text-text">Snake</h3>
+            </div>
+            <p className="text-xs text-text-secondary mb-3">
+              Classic snake — eat food, grow longer, don't hit walls or yourself!
+            </p>
+            <SnakeGame />
+          </div>
         </div>
 
         {/* Breakout Game — full width */}
