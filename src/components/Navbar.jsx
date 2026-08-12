@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Clock } from 'lucide-react'
 
 const links = [
   { label: 'About', href: '#about' },
@@ -7,6 +7,24 @@ const links = [
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ]
+
+function ClockDisplay() {
+  const [time, setTime] = useState(() => new Date().toLocaleTimeString('en-IN', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }))
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date().toLocaleTimeString('en-IN', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }))
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-2 border border-border/50 text-xs font-mono text-text">
+      <Clock size={12} className="text-muted" />
+      <span className="tabular-nums">{time}</span>
+    </div>
+  )
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -32,7 +50,9 @@ export default function Navbar() {
           Dhakshin<span className="text-muted">.</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
+          {/* Clock */}
+          <ClockDisplay />
           {links.map((l) => (
             <a
               key={l.href}
